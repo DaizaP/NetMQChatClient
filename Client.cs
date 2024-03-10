@@ -11,9 +11,10 @@ namespace NetMQChat
             string? name = Console.ReadLine();
             if (name == null)
                 name = new Guid().ToString();
-            
-            using (var reciever = new PullSocket("@tcp://127.0.0.1:5557"))
-            using (var sender = new PushSocket(">tcp://127.0.0.1:5558"))
+
+            Console.WriteLine("Укажите порт для прослушивания и отправки.");
+            using (var reciever = new PullSocket($"@tcp://127.0.0.1:{Console.ReadLine()}"))
+            using (var sender = new PushSocket($">tcp://127.0.0.1:{Console.ReadLine()}"))
             {
                 Task tSender = new Task(() =>
                 {
